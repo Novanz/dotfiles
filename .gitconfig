@@ -1,0 +1,14 @@
+[branch]
+	autoSetupMerge = simple
+[push]
+	autoSetupRemote = true
+[init]
+	defaultBranch = main
+[user]
+	name = Novan@480s
+	email = 55051643+Novanz@users.noreply.github.com
+[core]
+	editor = nano -w
+	excludesfile = /home/nan/.global-gitignore
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
