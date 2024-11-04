@@ -1,9 +1,6 @@
 # .bashrc
 . ~/.bash-seafly-prompt/command_prompt.bash
 # Source global definitions
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -28,6 +25,7 @@ if [ -d ~/.bashrc.d ]; then
     done
 fi
 unset rc
+export MANPAGER='nvim +Man!'
 # History settings.
 HISTCONTROL=ignoreboth:erasedups # Ignore and erase duplicates
 HISTFILE=$HOME/.history          # Custom history file
