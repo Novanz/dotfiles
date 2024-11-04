@@ -290,7 +290,7 @@ bind M-K comment main
 # bind Sh-M-L "Oc[1;6D|sed 's/.*/\L&/'" main
 
 ## For copying a marked region to the system clipboard:
-# bind Sh-M-T "{execute}|xsel -ib{enter}{undo}" main
+ bind Sh-M-T "{execute}|xsel -ib{enter}{undo}" main
 
 ## For snipping trailing blanks when you save a file:
 # bind ^S "{execute}| sed 's/\s\+$//' {enter}{savefile}" main

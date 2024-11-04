@@ -1,0 +1,5 @@
+alias cat='bat --theme gruvbox-dark'
+alias srch='dnf search'
+alias dnfup='sudo dnf upgrade --refresh'
+alias in='sudo dnf install'
+alias config='/usr/bin/git --git-dir=/home/nan/.cfg/ --work-tree=/home/nan'
