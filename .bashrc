@@ -99,3 +99,14 @@ set -o noclobber
 
 # Only logout if 'Control-d' is executed two consecutive times.
 export IGNOREEOF=1
+
+web() {
+    GOLD=$(tput setaf 222)
+    GREEN=$(tput setaf 79)
+    NC=$(tput sgr0)
+
+    read -ep "$(echo -e "${GOLD}Search ${GREEN}➜ ${NC}")" search_term
+    if [[ -n "$search_term" ]]; then
+        open "https://search.brave.com/search?q=${search_term}" &>/dev/null
+    fi
+}
