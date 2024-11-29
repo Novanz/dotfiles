@@ -44,10 +44,34 @@ alias cfg='/usr/bin/git --git-dir=/home/nan/.cfg/ --work-tree=/home/nan'
 
 # ls
 alias l='eza --no-quotes --color=always --color-scale-mode=fixed --group-directories-first'
-alias l.='ls -d .* --color=auto'
-alias ll='ls -l --color=auto'
-alias ls='ls --color=auto'
+alias l1='l --oneline'
+alias lc='_f() { ls "$@" | wc -l; }; _f'
+alias ll='l --long'
+alias lll='ll --changed --total-size --octal-permissions'
+alias la='ll --all'
+alias ll.='ll -d .*'
+alias lld='ll -D'
+alias lldt='_f() { ll -r --sort=modified -D "$@" | less; }; _f'
+alias llfs='find_by_size'
+alias lls='_f() { lll -r --sort=size "$@" | less; }; _f'
+alias llt='_f() { ll -r --sort=modified "$@" | less; }; _f'
+alias ls='ls --color --classify --human-readable --quoting-style=escape'
+
+# tree 
+alias t='eza --tree --group-directories-first'
+alias td='tree -C -d'
+alias tdl='tree -C -d -L'
+alias tl='eza --tree --group-directories-first -L'
 
 # other
 alias jfl='java -jar ~/opt/JFLAP7.1.jar'
 alias scrcp='scrcpy --no-audio -m 1024'
+
+# functions
+find_by_size() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: llfs <size> (e.g. 100k, +1M, +1G)"
+    else
+        find . -type f -size "$1" -exec eza --long {} \; ;
+    fi
+}
