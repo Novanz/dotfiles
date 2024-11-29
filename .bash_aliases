@@ -31,15 +31,23 @@ alias grep='grep --color=auto'
 alias open='xdg-open 2>/dev/null'
 
 # dnf
-alias cat='bat --theme gruvbox-dark'
 alias srch='dnf search'
 alias dnfup='sudo dnf upgrade --refresh'
 alias in='sudo dnf install'
-alias cfg='/usr/bin/git --git-dir=/home/nan/.cfg/ --work-tree=/home/nan'
+
+# cmd-line tools
+alias cat='bat --theme gruvbox-dark'
 alias v='nvim'
+
+# dotfiles git-alias
+alias cfg='/usr/bin/git --git-dir=/home/nan/.cfg/ --work-tree=/home/nan'
+
+# ls
 alias l='eza --no-quotes --color=always --color-scale-mode=fixed --group-directories-first'
 alias l.='ls -d .* --color=auto'
 alias ll='ls -l --color=auto'
 alias ls='ls --color=auto'
+
+# other
 alias jfl='java -jar ~/opt/JFLAP7.1.jar'
 alias scrcp='scrcpy --no-audio -m 1024'
