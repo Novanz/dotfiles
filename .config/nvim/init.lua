@@ -1,12 +1,12 @@
 local opt = vim.opt
 local map = vim.keymap.set
+local cmd = vim.cmd
+local g = vim.g
 
--- Optionen
-opt.number = true -- Show line numbers
+require('options')
+require('keymaps')
+-- Plugins via lazy
+require('plugins')
+require('colorscheme')
 
 
--- Mappings
-
--- These mappings allow you to use J and K in visual mode to move lines up and down, respectively.
-map("v", "J", ":m '>+1gv=gv")
-map("v", "K", ":m '<-2gv=gv")

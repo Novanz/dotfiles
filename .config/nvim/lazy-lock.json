@@ -1,0 +1,7 @@
+{
+  "gitsigns.nvim": { "branch": "main", "commit": "5f808b5e4fef30bd8aca1b803b4e555da07fc412" },
+  "lazy.nvim": { "branch": "main", "commit": "56ead98e05bb37a4ec28930a54d836d033cf00f2" },
+  "moonfly": { "branch": "master", "commit": "49701afd56b6ad7877dd20a192016f74f518e291" },
+  "nvim-linefly": { "branch": "master", "commit": "20102924d734a8f3ca760575b2b9a544efcf8dd3" },
+  "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" }
+}
