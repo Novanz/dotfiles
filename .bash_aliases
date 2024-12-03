@@ -16,12 +16,15 @@ alias dc='docker-compose'
 # Git
 # TODO: get into the logik of fzf functions and uncomment if needed
 # alias g~='cd "$(git rev-parse --show-toplevel)"'
-# alias ga='fzf_git_add'
+
+alias gs='git status'
+alias gcm='git commit -m'
+alias ga='fzf_git_add'
 # alias gll='fzf_git_log clean'
 # alias glla='fzf_git_log all'
 # alias glS='fzf_git_log_pickaxe'
 # alias grl='fzf_git_reflog'
-# alias gu='fzf_git_unadd'
+alias gu='fzf_git_unadd'
 
 # TODO: Start here
 
@@ -67,7 +70,9 @@ alias tl='eza --tree --group-directories-first -L'
 # other
 alias jfl='java -jar ~/opt/JFLAP7.1.jar'
 alias scrcp='scrcpy --no-audio -m 1024'
-
+alias vf='fzf_find_edit'
+alias cwd='copy_working_directory'
+alias fkill='fzf_kill'
 # functions
 find_by_size() {
     if [[ $# -eq 0 ]]; then

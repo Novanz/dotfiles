@@ -1,6 +1,7 @@
 # .bashrc
-# Alot of configuration copied from bluz71, Homepage: https://bluz71.github.io/
+# Alot of configuration copied from bluz71, see : https://bluz71.github.io/
 . ~/.bash-seafly-prompt/command_prompt.bash
+eval "$(fzf --bash)"
 # Source global definitions
 
 if [ -f ~/.bash_aliases ]; then
@@ -100,6 +101,8 @@ set -o noclobber
 # Only logout if 'Control-d' is executed two consecutive times.
 export IGNOREEOF=1
 
+# Functions
+# web() gives search prompt for Brave-search
 web() {
     GOLD=$(tput setaf 222)
     GREEN=$(tput setaf 79)
@@ -108,5 +111,79 @@ web() {
     read -ep "$(echo -e "${GOLD}Search ${GREEN}➜ ${NC}")" search_term
     if [[ -n "$search_term" ]]; then
         open "https://search.brave.com/search?q=${search_term}" &>/dev/null
+    fi
+}
+
+# fzf
+# git select files to stage 
+fzf_git_add() {
+    local selections=$(
+      git ls-files -m -o --exclude-standard | \
+        fzf --ansi \
+            --preview 'if (git ls-files --error-unmatch {1} &>/dev/null); then
+                           git diff --color=always {1} | delta
+                       else
+                           bat --color=always --line-range :500 {1}
+                       fi'
+    )
+    if [[ -n $selections ]]; then
+        git add --verbose $selections
+    fi
+}
+
+# git select files to unstage 
+fzf_git_unadd() {
+    local changes=$(git diff --name-only --cached | fzf --ansi | tr '\n' ' ')
+    if [[ -n "$changes" ]]; then
+        # git reset HEAD $changes
+        git restore --staged $changes
+    fi
+}
+
+# open fzf file in vim
+fzf_find_edit() {
+    local file=$(
+      fzf --query="$1" --no-multi --select-1 --exit-0 \
+          --preview 'bat --color=always --line-range :500 {}'
+    )
+    if [[ -n "$file" ]]; then
+        $EDITOR "$file"
+    fi
+}
+
+# fzf kill
+fzf_kill() {
+    if [[ $(uname) == "Linux" ]]; then
+        local pids=$(ps -f -u $USER | sed 1d | fzf | awk '{print $2}')
+    elif [[ $(uname) == "Darwin" ]]; then
+        local pids=$(ps -f -u $USER | sed 1d | fzf | awk '{print $3}')
+    else
+        echo 'Error: unknown platform.'
+        return
+    fi
+    if [[ -n "$pids" ]]; then
+        echo "$pids" | xargs kill -9 "$@"
+    fi
+}
+
+# git smart alias
+g() {
+    if [[ $# -eq 0 ]]; then
+        git status -sb
+    else
+        git "$@"
+    fi
+}
+
+# copy_working_directory to clipboard
+copy_working_directory() {
+    if [[ $(uname) == Linux ]]; then
+        echo -n ${PWD/#$HOME/\~} | tr -d "\r\n" | xclip -selection clipboard -i
+    elif [[ $(uname) == Darwin ]]; then
+        echo -n ${PWD/#$HOME/\~} | tr -d "\r\n" | pbcopy
+    fi
+    # Also copy current directory to a tmux paste buffer if tmux is active.
+    if [[ -n $TMUX ]]; then
+        echo -n ${PWD/#$HOME/\~} | tr -d "\r\n" | tmux load-buffer -
     fi
 }
