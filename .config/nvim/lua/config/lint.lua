@@ -14,6 +14,7 @@ lint.linters_by_ft = {
   lua = { "selene" },
   json = { "jsonlint" },
   markdown = { "markdownlint" },
+  cpp = { "cpplint" },
 }
 
 -- Custom linter arguments for 'markdownlint'.
