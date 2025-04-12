@@ -1,15 +1,16 @@
 local wezterm = require 'wezterm'
+local appearance = require 'modules.appearance'
 local act = wezterm.action
 
 local config = {}
 wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace())
 end)
-
+appearance.apply_to_config(config)
 config.keys = {
   -- Prompt for a name to use for a new workspace and switch to it.
   {
-    key = 'W',
+    key = 'w',
     mods = 'CTRL|SHIFT',
     action = act.PromptInputLine {
       description = wezterm.format {
@@ -33,19 +34,6 @@ config.keys = {
     },
   },
 }
-    -- color_scheme = 'Everforest Dark Hard (Gogh)', 
-    -- color_scheme = 'Operator Mono Dark',
-    -- config.color_scheme = 'Bamboo Light'
-    -- config.color_scheme = 'OneHalfDark'
-    -- config.color_scheme = 'Bluloco Light (Gogh)'
-    -- config.color_scheme = 'Bluloco Zsh Light (Gogh)'
-    -- config.color_scheme = 'BlulocoLight'
--- config.color_scheme = 'Builtin Light'
--- config.color_scheme = 'Builtin Tango Light'
--- config.color_scheme = 'Builtin Solarized Light'
-config.color_scheme = 'Catppuccin Latte (Gogh)'
-    config.font = wezterm.font 'JetBrains Mono'
-    config.window_decorations = "NONE"
     -- Leader is the same as my old tmux prefix
     config.leader = { key = '…', timeout_milliseconds = 1000 }
     config.keys = {

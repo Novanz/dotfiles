@@ -39,7 +39,7 @@ alias dnfup='sudo dnf upgrade --refresh'
 alias in='sudo dnf install'
 
 # cmd-line tools
-alias cat='bat --theme gruvbox-dark'
+alias cat='bat --theme OneHalfDark'
 alias v='nvim'
 
 # dotfiles git-alias

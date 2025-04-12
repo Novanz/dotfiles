@@ -11,6 +11,8 @@ local opts = {
 -------------------------------
 g.mapleader = ","
 
+-- remap ESC in insertion mode
+map("i", "jk", "<Esc>")
 -------------------------------
 -- Window managment mappings
 -------------------------------
