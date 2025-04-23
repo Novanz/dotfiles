@@ -71,7 +71,9 @@ alias tl='eza --tree --group-directories-first -L'
 alias nmlab='ssh student@172.16.0.33'
 
 # tmux
-tmn() { tmux new -s "$1" || tmux a -t "$1" }
+tmn() {
+    tmux new -s "$1" || tmux a -t "$1"
+}
 alias tmls='tmux ls'
 
 
@@ -86,6 +88,6 @@ find_by_size() {
     if [[ $# -eq 0 ]]; then
         echo "Usage: llfs <size> (e.g. 100k, +1M, +1G)"
     else
-        find . -type f -size "$1" -exec eza --long {} \; ;
+        find . -type f -size "$1" -exec eza --long {} \;
     fi
 }
