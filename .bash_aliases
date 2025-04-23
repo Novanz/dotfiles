@@ -67,6 +67,14 @@ alias td='tree -C -d'
 alias tdl='tree -C -d -L'
 alias tl='eza --tree --group-directories-first -L'
 
+# ssh
+alias nmlab='ssh student@172.16.0.33'
+
+# tmux
+tmn() { tmux new -s "$1" || tmux a -t "$1" }
+alias tmls='tmux ls'
+
+
 # other
 alias jfl='java -jar ~/opt/JFLAP7.1.jar'
 alias scrcp='scrcpy --no-audio -m 1024'
