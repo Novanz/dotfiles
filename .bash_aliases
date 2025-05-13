@@ -69,13 +69,21 @@ alias tl='eza --tree --group-directories-first -L'
 
 # ssh
 alias nmlab='ssh student@172.16.0.33'
+alias tnmlab='ssh student@172.16.0.33 tmn'
 
+alias nspki='ssh -p 2222 nan@127.0.0.1'
+
+alias sprag='ssh student@141.28.73.88'
 # tmux
 tmn() {
     tmux new -s "$1" || tmux a -t "$1"
 }
 alias tmls='tmux ls'
 
+# wireguard
+
+alias hfuup='wg-quick up wg-hfu'
+alias hfudown='wg-quick down wg-hfu'
 
 # other
 alias jfl='java -jar ~/opt/JFLAP7.1.jar'
