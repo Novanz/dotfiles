@@ -68,6 +68,7 @@ alias tdl='tree -C -d -L'
 alias tl='eza --tree --group-directories-first -L'
 
 # ssh
+alias s="kitten ssh"
 alias nmlab='ssh student@172.16.0.33'
 alias tnmlab='ssh student@172.16.0.33 tmn'
 
