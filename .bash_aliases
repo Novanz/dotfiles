@@ -61,23 +61,24 @@ alias lls='_f() { lll -r --sort=size "$@" | less; }; _f'
 alias llt='_f() { ll -r --sort=modified "$@" | less; }; _f'
 alias ls='ls --color --classify --human-readable --quoting-style=escape'
 
-# tree 
+# tree
 alias t='eza --tree --group-directories-first'
 alias td='tree -C -d'
 alias tdl='tree -C -d -L'
 alias tl='eza --tree --group-directories-first -L'
 
 # ssh
+alias sst="ssh -t -- /bin/sh -c 'tmux has-session && exec tmux attach || exec tmux'"
 alias s="kitten ssh"
-alias nmlab='ssh student@172.16.0.33'
-alias tnmlab='ssh student@172.16.0.33 tmn'
+alias nmlab='sst student@172.16.0.33'
+# alias tnmlab='sst student@172.16.0.33 tmn'
 
-alias nspki='ssh -p 2222 nan@127.0.0.1'
+alias nspki='sst -p 2222 nan@127.0.0.1'
 
-alias sprag='ssh student@141.28.73.88'
+alias sprag='sst student@141.28.73.88'
 # tmux
 tmn() {
-    tmux new -s "$1" || tmux a -t "$1"
+  tmux new -s "$1" || tmux a -t "$1"
 }
 alias tmls='tmux ls'
 
@@ -94,9 +95,9 @@ alias cwd='copy_working_directory'
 alias fkill='fzf_kill'
 # functions
 find_by_size() {
-    if [[ $# -eq 0 ]]; then
-        echo "Usage: llfs <size> (e.g. 100k, +1M, +1G)"
-    else
-        find . -type f -size "$1" -exec eza --long {} \;
-    fi
+  if [[ $# -eq 0 ]]; then
+    echo "Usage: llfs <size> (e.g. 100k, +1M, +1G)"
+  else
+    find . -type f -size "$1" -exec eza --long {} \;
+  fi
 }
