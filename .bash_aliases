@@ -12,7 +12,7 @@ alias 775='chmod 775'
 # Docker
 alias d='docker'
 alias dc='docker-compose'
-
+alias dx='docker exec'
 # Git
 # TODO: get into the logik of fzf functions and uncomment if needed
 # alias g~='cd "$(git rev-parse --show-toplevel)"'
@@ -41,58 +41,73 @@ alias in='sudo dnf install'
 # cmd-line tools
 alias cat='bat --theme OneHalfDark'
 alias v='nvim'
+alias vi='nvim'
+alias vim='nvim'
 
 # dotfiles git-alias
 alias cfg='/usr/bin/git --git-dir=/home/nan/.cfg/ --work-tree=/home/nan'
 
 # ls
-alias l='eza --no-quotes --color=always --color-scale-mode=fixed --group-directories-first'
-alias l1='l --oneline'
-alias lc='_f() { ls "$@" | wc -l; }; _f'
-alias ll='l --long'
-alias lll='ll --changed --total-size --octal-permissions'
-alias la='ll --all'
-alias lg='ll --git'
-alias ll.='ll -d .*'
-alias lld='ll -D'
-alias lldt='_f() { ll -r --sort=modified -D "$@" | less; }; _f'
+# Basic, colorized, directories first
+alias l='ls --color=auto --group-directories-first -F'
+# One line per entry
+alias l1='l -1'
+# Count entries in directory
+alias lc='_f() { ls -A "$@" | wc -l; }; _f'
+# Long listing, human readable
+alias ll='l -lh'
+# Long listing, show octal permissions, total size, and sort by time changed
+alias lll='ll -l --time=ctime --block-size=1 --numeric-uid-gid'
+# Long listing, show all files (including dotfiles)
+alias la='ll -a'
+# Placeholder: need eza
+alias lg='echo "No ls equivalent for --git"'
+# List only dotfiles in long format
+alias ll.='ll -d .??*'
+# List only directories in long format
+alias lld='ll -d */'
+# List directories in long format, sorted by modified time, reversed, paginated
+alias lldt='_f() { ll -ltrd */ | less; }; _f'
+# Need eza to work with find_by_size
 alias llfs='find_by_size'
-alias lls='_f() { lll -r --sort=size "$@" | less; }; _f'
-alias llt='_f() { ll -r --sort=modified "$@" | less; }; _f'
-alias ls='ls --color --classify --human-readable --quoting-style=escape'
+# Long listing, sorted by size, reversed, paginated
+alias lls='_f() { ll -lSr | less; }; _f'
+# Long listing, sorted by time modified, reversed, paginated
+alias llt='_f() { ll -ltr | less; }; _f'
+# Default ls with color, classify, human-readable, escape quoting
+alias ls='ls --color=auto -F -h --quoting-style=escape'
 
 # tree
-alias t='eza --tree --group-directories-first'
+# Tree view, directories first (tree doesn't have group-directories-first, but close)
+alias t='tree -C'
+# Tree view, directories only
 alias td='tree -C -d'
-alias tdl='tree -C -d -L'
-alias tl='eza --tree --group-directories-first -L'
+# Tree view, directories only, depth limit
+alias tdl='tree -C -d -L' # Usage: tdl <depth>
+# Tree view, depth limit
+alias tl='tree -C -L' # Usage: tl <depth>
 
 # ssh
-alias sst="ssh -t -- /bin/sh -c 'tmux has-session && exec tmux attach || exec tmux'"
+alias sst="-t -- /bin/sh -c 'tmux has-session && exec tmux attach || exec tmux'"
 alias s="kitten ssh"
-alias nmlab='sst student@172.16.0.33'
-# alias tnmlab='sst student@172.16.0.33 tmn'
+alias rm-nmlab='ssh rm-nmlab-main'
+# alias nspki='ssh -t -p 2222 nan@127.0.0.1 "tmux attach || tmux new"'
+alias vm-nspki='ssh vm-nspki-main'
+alias rm-rag='ssh rm-nmlab-main'
 
-alias nspki='sst -p 2222 nan@127.0.0.1'
-
-alias sprag='sst student@141.28.73.88'
 # tmux
-tmn() {
-  tmux new -s "$1" || tmux a -t "$1"
-}
 alias tmls='tmux ls'
 
 # wireguard
-
 alias hfuup='wg-quick up wg-hfu'
 alias hfudown='wg-quick down wg-hfu'
 
 # other
-alias jfl='java -jar ~/opt/JFLAP7.1.jar'
 alias scrcp='scrcpy --no-audio -m 1024'
 alias vf='fzf_find_edit'
 alias cwd='copy_working_directory'
 alias fkill='fzf_kill'
+
 # functions
 find_by_size() {
   if [[ $# -eq 0 ]]; then

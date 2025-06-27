@@ -5,13 +5,12 @@ eval "$(fzf --bash)"
 # Source global definitions
 
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+  . ~/.bash_aliases
 fi
-
 
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+  PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
 
@@ -20,11 +19,11 @@ export PATH
 
 # User specific aliases and functions
 if [ -d ~/.bashrc.d ]; then
-    for rc in ~/.bashrc.d/*; do
-        if [ -f "$rc" ]; then
-            . "$rc"
-        fi
-    done
+  for rc in ~/.bashrc.d/*; do
+    if [ -f "$rc" ]; then
+      . "$rc"
+    fi
+  done
 fi
 unset rc
 
@@ -69,10 +68,10 @@ export MANPAGER='nvim +Man!'
 # History settings.
 HISTCONTROL=ignoreboth:erasedups # Ignore and erase duplicates
 
-HISTFILE=$HOME/.history          # Custom history file
-HISTFILESIZE=99999               # Max size of history file
-HISTIGNORE=?:??                  # Ignore one and two letter commands
-HISTSIZE=99999                   # Amount of history to preserve
+HISTFILE=$HOME/.history # Custom history file
+HISTFILESIZE=99999      # Max size of history file
+HISTIGNORE=?:??         # Ignore one and two letter commands
+HISTSIZE=99999          # Amount of history to preserve
 # Note, to immediately append to history file refer to the 'prompt'
 # function.
 
@@ -92,7 +91,7 @@ export SHELL_SESSION_HISTORY=0
 #  - nocaseglob - case-insensitive globbing
 #  - no_empty_cmd_completion - do not TAB expand empty lines
 shopt -s autocd cdspell direxpand dirspell globstar histappend histverify \
-nocaseglob no_empty_cmd_completion 
+  nocaseglob no_empty_cmd_completion
 
 # Prevent file overwrite on stdout redirection.
 # Use `>|` to force redirection to an existing file.
@@ -104,87 +103,88 @@ export IGNOREEOF=1
 # Functions
 # web() gives search prompt for Brave-search
 web() {
-    GOLD=$(tput setaf 222)
-    GREEN=$(tput setaf 79)
-    NC=$(tput sgr0)
+  GOLD=$(tput setaf 222)
+  GREEN=$(tput setaf 79)
+  NC=$(tput sgr0)
 
-    read -ep "$(echo -e "${GOLD}Search ${GREEN}➜ ${NC}")" search_term
-    if [[ -n "$search_term" ]]; then
-        open "https://search.brave.com/search?q=${search_term}" &>/dev/null
-    fi
+  read -ep "$(echo -e "${GOLD}Search ${GREEN}➜ ${NC}")" search_term
+  if [[ -n "$search_term" ]]; then
+    open "https://search.brave.com/search?q=${search_term}" &>/dev/null
+  fi
 }
 
 # fzf
-# git select files to stage 
+# git select files to stage
 fzf_git_add() {
-    local selections=$(
-      git ls-files -m -o --exclude-standard | \
-        fzf --ansi \
-            --preview 'if (git ls-files --error-unmatch {1} &>/dev/null); then
+  local selections=$(
+    git ls-files -m -o --exclude-standard |
+      fzf --ansi \
+        --preview 'if (git ls-files --error-unmatch {1} &>/dev/null); then
                            git diff --color=always {1} | delta
                        else
                            bat --color=always --line-range :500 {1}
                        fi'
-    )
-    if [[ -n $selections ]]; then
-        git add --verbose $selections
-    fi
+  )
+  if [[ -n $selections ]]; then
+    git add --verbose $selections
+  fi
 }
 
-# git select files to unstage 
+# git select files to unstage
 fzf_git_unadd() {
-    local changes=$(git diff --name-only --cached | fzf --ansi | tr '\n' ' ')
-    if [[ -n "$changes" ]]; then
-        # git reset HEAD $changes
-        git restore --staged $changes
-    fi
+  local changes=$(git diff --name-only --cached | fzf --ansi | tr '\n' ' ')
+  if [[ -n "$changes" ]]; then
+    # git reset HEAD $changes
+    git restore --staged $changes
+  fi
 }
 
 # open fzf file in vim
 fzf_find_edit() {
-    local file=$(
-      fzf --query="$1" --no-multi --select-1 --exit-0 \
-          --preview 'bat --color=always --line-range :500 {}'
-    )
-    if [[ -n "$file" ]]; then
-        $EDITOR "$file"
-    fi
+  local file=$(
+    fzf --query="$1" --no-multi --select-1 --exit-0 \
+      --preview 'bat --color=always --line-range :500 {}'
+  )
+  if [[ -n "$file" ]]; then
+    $EDITOR "$file"
+  fi
 }
 
 # fzf kill
 fzf_kill() {
-    if [[ $(uname) == "Linux" ]]; then
-        local pids=$(ps -f -u $USER | sed 1d | fzf | awk '{print $2}')
-    elif [[ $(uname) == "Darwin" ]]; then
-        local pids=$(ps -f -u $USER | sed 1d | fzf | awk '{print $3}')
-    else
-        echo 'Error: unknown platform.'
-        return
-    fi
-    if [[ -n "$pids" ]]; then
-        echo "$pids" | xargs kill -9 "$@"
-    fi
+  if [[ $(uname) == "Linux" ]]; then
+    local pids=$(ps -f -u $USER | sed 1d | fzf | awk '{print $2}')
+  elif [[ $(uname) == "Darwin" ]]; then
+    local pids=$(ps -f -u $USER | sed 1d | fzf | awk '{print $3}')
+  else
+    echo 'Error: unknown platform.'
+    return
+  fi
+  if [[ -n "$pids" ]]; then
+    echo "$pids" | xargs kill -9 "$@"
+  fi
 }
 
 # git smart alias
 g() {
-    if [[ $# -eq 0 ]]; then
-        git status -sb
-    else
-        git "$@"
-    fi
+  if [[ $# -eq 0 ]]; then
+    git status -sb
+  else
+    git "$@"
+  fi
 }
 
 # copy_working_directory to clipboard
 copy_working_directory() {
-    if [[ $(uname) == Linux ]]; then
-        echo -n ${PWD/#$HOME/\~} | tr -d "\r\n" | xclip -selection clipboard -i
-    elif [[ $(uname) == Darwin ]]; then
-        echo -n ${PWD/#$HOME/\~} | tr -d "\r\n" | pbcopy
-    fi
-    # Also copy current directory to a tmux paste buffer if tmux is active.
-    if [[ -n $TMUX ]]; then
-        echo -n ${PWD/#$HOME/\~} | tr -d "\r\n" | tmux load-buffer -
-    fi
+  if [[ $(uname) == Linux ]]; then
+    echo -n ${PWD/#$HOME/\~} | tr -d "\r\n" | xclip -selection clipboard -i
+  elif [[ $(uname) == Darwin ]]; then
+    echo -n ${PWD/#$HOME/\~} | tr -d "\r\n" | pbcopy
+  fi
+  # Also copy current directory to a tmux paste buffer if tmux is active.
+  if [[ -n $TMUX ]]; then
+    echo -n ${PWD/#$HOME/\~} | tr -d "\r\n" | tmux load-buffer -
+  fi
 }
+# to be able to use docker istead of podman on Fedora 41
 export DOCKER_HOST=unix:///var/run/docker.sock
