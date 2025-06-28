@@ -1,0 +1,65 @@
+""" Map leader to space ---------------------
+let mapleader=" "
+
+""" Plugins  --------------------------------
+set surround
+set commentary
+set textobj-entire
+set peekaboo
+set functiontextobj
+set highlightedyank
+let mapleader=","
+set easymotion
+set which-key
+
+""" Plugin settings -------------------------
+let g:highlightedyank_highlight_color = "rgba(144, 238, 144, 155)"
+""" Common settings -------------------------
+set clipboard=unnamedplus,unnamed
+set showmode
+set scrolloff=5
+set notimeout
+
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+set numbers
+set relativenumber
+
+set tabstop=4
+set breakindent
+set colorcolumn=100,120
+set cursorline
+
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+
+""" Mappings --------------------------------
+inoremap jk <Esc>
+inoremap kj <Esc>
+map U <C-R>
+nnoremap <silent> <C-L> :nohlsearch<CR>
+
+nmap [[ <Action>(MethodUp)
+nmap ]] <Action>(MethodDown)
+map <leader>j <Plug>(easymotion-jumptoanywhere)
+
+map <leader>rc <Action>(ReformatCode)
+map <leader>rf <Action>(ShowFormatFileDialog)
+
+map <leader>d <Action>(Debug)
+map <leader>rr <Action>(RenameElement)
+map <leader>c <Action>(Stop)
+map <leader>z <Action>(ToggleDistractionFreeMode)
+
+map <leader>s <Action>(SelectInProjectView)
+map <leader>a <Action>(Annotate)
+map <leader>h <Action>(Vcs.ShowTabbedFileHistory)
+map <S-Space> <Action>(GotoNextError)
+
+map <leader>b <Action>(ToggleLineBreakpoint)
+map <leader>o <Action>(FileStructurePopup)
