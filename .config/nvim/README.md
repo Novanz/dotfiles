@@ -10,12 +10,18 @@
 [x] treesitter + map
 [x] treesitter-textobj + map
 [x] which-key
-[ ] install
+[x] fzf-lua
 
 ## Opts
-[] basic (see options.lua)
+[x] basic (see options.lua)
 
 ## Keymaps
-[] remap Esc in insert mode
-[] add windows, buffers navigation
-[]  
+[x] remap Esc in insert mode
+[x] add windows, buffers navigation
+[]
+
+# Advanced
+## Plugins
+[ ] LSP
+[ ] blink.cmp
+[ ] conform

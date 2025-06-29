@@ -16,9 +16,9 @@ map("n", "<Backspace>", "<C-^>")    -- Alternate last two files
 -------------------------------
 -- Window managment mappings
 -------------------------------
-map("n", "<Leader>s", "<C-w>s")     -- h-split
-map("n", "<Leader>v", "<C-w>v")     -- v-split
-map("n", "<Leader>q", "<C-w>c")     -- hide buf, and close win
+map("n", "<Leader>s", "<C-w>s", {desc="Horizontal split"})     -- h-split
+map("n", "<Leader>v", "<C-w>v", {desc="Vertical split"})     -- v-split
+map("n", "<Leader>q", "<C-w>c", {desc="Hide buffee and close window"})     -- hide buf, and close win
 map("n", "<Leader>c", ":cclose<CR>:lclose<CR>:pclose<CR>", opts) -- close helper windows
 map("n", "<Leader>t", ":$tabnew<CR>", opts)     -- new tab
 map("n", "<Leader>T", ":tabclose<CR>", opts)    -- close tab
