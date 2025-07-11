@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Obsidian
+Exec=/home/nan/Applications/Obsidian-1.8.10.AppImage %u
+Terminal=false
+Type=Application
+Icon=/home/nan/.icons/obsidian.png
+StartupWMClass=obsidian
+Comment=Obsidian
+Categories=Office;
+MimeType=text/html;x-scheme-handler/obsidian;

@@ -1,7 +1,12 @@
 # .bashrc
 # Alot of configuration copied from bluz71, see : https://bluz71.github.io/
+
+# Prompt
 . ~/.bash-seafly-prompt/command_prompt.bash
+# fzf + zoxide
 eval "$(fzf --bash)"
+eval "$(zoxide init bash --cmd cd)"
+
 # Source global definitions
 
 if [ -f ~/.bash_aliases ]; then
@@ -12,6 +17,15 @@ fi
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
   PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
+
+# AppImages
+APP_DIR="$HOME/Applications/"
+if [ -d "$APP_DIR" ]; then
+  if [[ ":$PATH:" != *":$APP_DIR:"* ]]; then
+    export PATH="$APP_DIR:$PATH"
+  fi
+fi
+
 export PATH
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
@@ -187,4 +201,4 @@ copy_working_directory() {
   fi
 }
 # to be able to use docker istead of podman on Fedora 41
-export DOCKER_HOST=unix:///var/run/docker.sock
+# export DOCKER_HOST=unix:///run/docker.sock

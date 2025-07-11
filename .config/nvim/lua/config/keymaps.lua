@@ -22,3 +22,5 @@ map("n", "<Leader>q", "<C-w>c", {desc="Hide buffee and close window"})     -- hi
 map("n", "<Leader>c", ":cclose<CR>:lclose<CR>:pclose<CR>", opts) -- close helper windows
 map("n", "<Leader>t", ":$tabnew<CR>", opts)     -- new tab
 map("n", "<Leader>T", ":tabclose<CR>", opts)    -- close tab
+
+vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end, { desc = "Open Diagnostics in Float" })

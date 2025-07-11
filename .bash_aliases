@@ -93,7 +93,8 @@ alias s="kitten ssh"
 alias rm-nmlab='ssh rm-nmlab-main'
 # alias nspki='ssh -t -p 2222 nan@127.0.0.1 "tmux attach || tmux new"'
 alias vm-nspki='ssh vm-nspki-main'
-alias rm-rag='ssh rm-nmlab-main'
+alias rm-rag='ssh rm-rag-main'
+alias rm-ragh='ssh rm-ragh-main'
 
 # tmux
 alias tmls='tmux ls'

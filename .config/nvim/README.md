@@ -23,5 +23,6 @@
 # Advanced
 ## Plugins
 [ ] LSP
+[ ] Mason
 [ ] blink.cmp
 [ ] conform
