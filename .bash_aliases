@@ -34,9 +34,9 @@ alias grep='grep --color=auto'
 alias open='xdg-open 2>/dev/null'
 
 # dnf
-alias srch='dnf search'
+alias dnfse='dnf search'
 alias dnfup='sudo dnf upgrade --refresh'
-alias in='sudo dnf install'
+alias dnfin='sudo dnf install'
 
 # cmd-line tools
 alias cat='bat --theme OneHalfDark'
